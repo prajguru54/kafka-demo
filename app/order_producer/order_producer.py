@@ -1,6 +1,6 @@
 import json
 import time
-import constants
+from app.core import constants
 from confluent_kafka import Producer
 
 config = {"bootstrap.servers": constants.BOOTSTRAP_SERVER}

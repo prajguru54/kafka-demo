@@ -1,7 +1,8 @@
 # sourcery skip: convert-to-enumerate
 from confluent_kafka import Consumer
 import json
-import constants
+from app.core import constants
+from app.order_consumer.order import Order
 
 config = {
     "bootstrap.servers": constants.BOOTSTRAP_SERVER,
@@ -21,6 +22,8 @@ while True:
     if msg.error():
         print(f"Consumer error: {msg.error()}")
         continue
-    print(f"Order #{i} received: {json.loads(msg.value().decode('utf-8'))}")
+    order_data = json.loads(msg.value().decode("utf-8"))
+    print(f"Order #{i} received: {order_data}")
+    order = Order(user_id="", total_cost="")
     i += 1
     print()

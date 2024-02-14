@@ -1,7 +1,7 @@
 import json
 
 from confluent_kafka import Consumer
-import constants
+from app.core import constants
 
 config = {
     "bootstrap.servers": constants.BOOTSTRAP_SERVER,
