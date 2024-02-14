@@ -1,11 +1,10 @@
 import json
 import time
 import constants
+from confluent_kafka import Producer
 
-from kafka import KafkaProducer
-
-
-producer = KafkaProducer(bootstrap_servers=constants.BOOTSTRAP_SERVER)
+config = {"bootstrap.servers": constants.BOOTSTRAP_SERVER}
+producer = Producer(config)
 
 print(f"Will generate one unique order every {constants.SLEEP_FOR} seconds")
 
@@ -17,6 +16,9 @@ for i in range(1, constants.ORDER_LIMIT):
         "items": "burger,sandwich",
     }
 
-    producer.send(constants.ORDER_CREATED_TOPIC, json.dumps(data).encode("utf-8"))
+    producer.produce(
+        topic=constants.ORDER_CREATED_TOPIC,
+        value=json.dumps(data).encode("utf-8"),
+    )
     print(f"Done Sending..{i}")
     time.sleep(constants.SLEEP_FOR)
