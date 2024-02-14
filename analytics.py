@@ -3,9 +3,9 @@ import json
 from confluent_kafka import Consumer
 import constants
 
-config = consumer_conf = {
+config = {
     "bootstrap.servers": constants.BOOTSTRAP_SERVER,
-    "group.id": "my_consumer_group",
+    "group.id": "analytics_consumer_id",
     "auto.offset.reset": "earliest",
 }
 consumer = Consumer(config)

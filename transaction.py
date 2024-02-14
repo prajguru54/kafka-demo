@@ -5,7 +5,7 @@ import constants
 
 consumer_conf = {
     "bootstrap.servers": constants.BOOTSTRAP_SERVER,
-    "group.id": "my_consumer_group",
+    "group.id": "transaction_consumer_id",
     "auto.offset.reset": "earliest",
 }
 consumer = Consumer(consumer_conf)
